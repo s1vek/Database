@@ -28,8 +28,6 @@ amount int not null,
 
 create table review (
 id int primary key identity (1,1),
-product_id int foreign key references products(id),
-customer_id int foreign key references customer(id),
 reviewtext varchar(50) not null,
 );
 
@@ -41,8 +39,8 @@ INSERT INTO products (product_name, price, is_available) VALUES ('XBOX', 300.00,
 INSERT INTO products (product_name, price, is_available) VALUES ('Stereo Box', 150.00, 1);
 INSERT INTO products (product_name, price, is_available) VALUES ('Fridge', 500.00, 1);
 
-INSERT INTO review (product_name, price, is_available) VALUES ('Fridge', 500.00, 1);
 
+drop table review;
 delete from customer;
 delete from orders;
 delete from order_details;

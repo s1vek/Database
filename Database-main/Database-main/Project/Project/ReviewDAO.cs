@@ -50,7 +50,6 @@ namespace Project
                             Review review = new Review
                             {
                                 Id = reader.GetInt32(0),
-                                Customer_id = reader.GetInt32(1),
                                 Reviewtext = reader.GetString(2),
                             };
                             yield return review;
@@ -84,7 +83,6 @@ namespace Project
                         Review  review = new Review
                         {
                             Id = reader.GetInt32(0),
-                            Customer_id = reader.GetInt32(1),
                             Reviewtext = reader.GetString(2),
                         };
 
@@ -106,11 +104,10 @@ namespace Project
         {
             SqlConnection con = DatabaseSingleton.GetInstance();
             
-                string saveSql = "INSERT INTO dbo.review (customer_id, reviewtext) VALUES (@customer_id, @reviewtext);";
+                string saveSql = "INSERT INTO dbo.review (reviewtext) VALUES (@reviewtext);";
                 
                 using (SqlCommand command = new SqlCommand(saveSql, con))
                 {
-                    command.Parameters.Add("@customer_id", SqlDbType.Int).Value = element.Customer_id;
                     command.Parameters.Add("@reviewtext", SqlDbType.VarChar, 250).Value = element.Reviewtext;
 
                     command.CommandType = CommandType.Text;
@@ -128,12 +125,12 @@ namespace Project
         {
             using (SqlConnection con = DatabaseSingleton.GetInstance())
             {
-                string saveSql = "UPDATE dbo.review SET customer_id = @customer_id, reviewtext = @reviewtext;";
+                string saveSql = "UPDATE dbo.review SET reviewtext = @reviewtext;";
 
                 con.Open();
                 using (SqlCommand command = new SqlCommand(saveSql, con))
                 {
-                    command.Parameters.Add("@customer_id", SqlDbType.Int).Value = element.Customer_id;
+ 
                     command.Parameters.Add("@reviewtext", SqlDbType.VarChar, 250).Value = element.Reviewtext;
 
                     command.CommandType = CommandType.Text;

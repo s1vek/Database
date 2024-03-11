@@ -5,6 +5,7 @@
         static void Main(string[] args)
         {
 
+           
             IRepository<Customer> dao = new CustomerDAO();
             Customer customer = new Customer();
 
@@ -111,6 +112,13 @@
                 ordersdetailDAO.Delete(orderId);
 
             }
+
+            Console.WriteLine("Write us a review");
+            string reviewtext = Console.ReadLine();
+            Review review = new Review();
+            review.Reviewtext = reviewtext;
+            IRepository<Review> reviewdao = new ReviewDAO();
+            reviewdao.Insert(review);
 
 
          
